@@ -22,7 +22,6 @@ public class Imprimir {
             return;
         }
 
-        System.out.println("--------Listagem de Serviços--------");
 
         // Monta o conteúdo que será impresso e salvo no arquivo
         StringBuilder conteudo = new StringBuilder();
@@ -34,7 +33,6 @@ public class Imprimir {
                         + " | Descrição: " + servicos[j].descricao
                         + " | Valor: R$" + servicos[j].valor
                         + " | Cód. Peça: " + servicos[j].codpeca;
-                System.out.println(linha);
                 conteudo.append(linha).append(System.lineSeparator());
             }
         }

@@ -1,2 +1,4 @@
 --------LISTAGEM DE SERVIÇOS--------
-Código: 0 | Descrição: montagem da moto | Valor: R$1500.0 | Cód. Peça: 1
+Código: 0 | Descrição: monta moto | Valor: R$150.55 | Cód. Peça: 1
+Código: 1 | Descrição: monta carro | Valor: R$202.0 | Cód. Peça: 2
+Código: 2 | Descrição: carro2 | Valor: R$255.89 | Cód. Peça: 2

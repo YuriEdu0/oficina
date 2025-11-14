@@ -3,6 +3,7 @@ package com.mycompany.oficina;
 import java.util.Scanner;
 
 public class Oficina {
+
     /**
      * @param args
      */
@@ -11,7 +12,7 @@ public class Oficina {
         Peca[] pecas = new Peca[50]; //PASSO 1: cria um array com espaço para as peças. PASSO 2 ao cadastrar uma peça
         Servico[] servicos = new Servico[50]; //PASSO 1: cria um array com espaço para as servicos. PASSO 2 ao cadastrar uma servicos
         String peca, descServico;
-        int menu = 0, i = 0, codservico = 0,resp = 0, codpeca, totalpecas = 0, totalservicos = 0;
+        int menu = 0, i = 0, codservico = 0, resp = 0, codpeca, totalpecas = 0, totalservicos = 0;
         double valor;
 
         do {
@@ -40,7 +41,7 @@ public class Oficina {
                         System.out.println("-------------------\n"
                                 + "Peça cadastrada com sucesso! ");
                         Peca peca1 = new Peca(peca, i);
-                        pecas[totalpecas] = new Peca(peca, i); //PASSO 2: Registra a peça cadastrada no array. PASSO 3 na listagem de peças dos serviços
+                        pecas[totalpecas] = peca1; 
                         totalpecas++;
                         peca1.nomePeca();
 
@@ -80,20 +81,20 @@ public class Oficina {
                             System.out.print("\nDigite o código da peça: ");
                             codpeca = sc.nextInt();
                             sc.nextLine();
-                            
+
                             for (int j = 0; j < totalpecas; j++) {
                                 if (pecas[j].codpeca == codpeca) {
                                     codigoValido = true;
                                     break;
                                 }
                             }
-                            
+
                             if (!codigoValido) {
                                 System.out.println("Código de peça inválido! Tente novamente.");
                             }
                         } while (!codigoValido);
                         Servico servico = new Servico(codservico, descServico, valor, codpeca);//PASSO 2: Registra a serviço cadastrada no array. PASSO 3 na listagem  dos serviços
-                        servicos[totalservicos] = servico; 
+                        servicos[totalservicos] = servico;
 
                         totalservicos++;
                         codservico++;
@@ -111,42 +112,43 @@ public class Oficina {
                     break;
 
                 case 3:
-                    do {
-                        System.out.print("--------Listagem de Serviços-------\n");
-                        if (totalservicos == 0) {
-                            System.out.println("Nenhum serviço cadastrado ainda! Cadastre um serviço e tente novamente...");
-                            break;
-                        }
+                    System.out.print("--------Listagem de Serviços-------\n");
+                    if (totalservicos == 0) {
+                        System.out.println("Nenhum serviço cadastrado ainda! Cadastre um serviço e tente novamente...");
+                    } else {
 
-                        //PASSO 3: Percorre o array
                         for (int j = 0; j < totalservicos; j++) {
                             if (servicos[j] != null) {
-
                                 Peca p = Peca.getPeca(servicos[j].codpeca, pecas, totalpecas);
 
                                 if (p != null) {
                                     System.out.println(
-                                        "Código: " + servicos[j].codservico +
-                                        " | Descrição: " + servicos[j].descricao +
-                                        " | Valor: " + servicos[j].valor +
-                                        " | Peça: [" + p.codpeca + " - " + p.nomepeca + "]"
+                                            "Código: " + servicos[j].codservico
+                                            + " | Descrição: " + servicos[j].descricao
+                                            + " | Valor: " + servicos[j].valor
+                                            + " | Peça: [" + p.codpeca + " - " + p.nomepeca + "]"
                                     );
                                 } else {
                                     System.out.println(
-                                        "Código: " + servicos[j].codservico +
-                                        " | Descrição: " + servicos[j].descricao +
-                                        " | Valor: " + servicos[j].valor +
-                                        " | Peça: (não encontrada)"
+                                            "Código: " + servicos[j].codservico
+                                            + " | Descrição: " + servicos[j].descricao
+                                            + " | Valor: " + servicos[j].valor
+                                            + " | Peça: (não encontrada)"
                                     );
                                 }
                             }
                         }
 
-                    } while (resp != 2);
-                    
-                    Imprimir.imprimirServicos(servicos, totalservicos);
-                    
+                        // Gera o arquivo TXT (mantendo a impressão na tela como está)
+                        Imprimir.imprimirServicos(servicos, totalservicos);
+                    }
+
+                    // Pequena pausa para o usuário ver a saída (opcional)
+                    System.out.println("Pressione ENTER para voltar ao menu...");
+                    sc.nextLine();
+
                     break;
+
             }
 
         } while (menu != 4);
