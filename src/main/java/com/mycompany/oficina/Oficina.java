@@ -143,7 +143,9 @@ public class Oficina {
                         }
 
                     } while (resp != 2);
-
+                    
+                    Imprimir.imprimirServicos(servicos, totalservicos);
+                    
                     break;
             }
 

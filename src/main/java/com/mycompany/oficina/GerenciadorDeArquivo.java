@@ -1,4 +1,4 @@
-package gerenciamentoarquivo;
+package com.mycompany.oficina;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
