@@ -16,4 +16,14 @@ public class Peca {
         System.out.println("Peça: " + nomepeca + "\n"
         + "Codigo: " + codpeca);
     } 
+
+    public static Peca getPeca(int cod, Peca[] pecas, int totalpecas) {
+        for (int i = 0; i < totalpecas; i++) {
+            if (pecas[i] != null && pecas[i].codpeca == cod) {
+                return pecas[i];
+            }
+        }
+        return null; // não achou
+    }
+
 }

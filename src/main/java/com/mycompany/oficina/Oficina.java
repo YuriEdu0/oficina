@@ -92,14 +92,14 @@ public class Oficina {
                                 System.out.println("Código de peça inválido! Tente novamente.");
                             }
                         } while (!codigoValido);
-                        
-                        servicos[totalservicos] = new Servico(codservico, descServico, valor, codpeca); //PASSO 2: Registra a serviço cadastrada no array. PASSO 3 na listagem  dos serviços
+                        Servico servico = new Servico(codservico, descServico, valor, codpeca);//PASSO 2: Registra a serviço cadastrada no array. PASSO 3 na listagem  dos serviços
+                        servicos[totalservicos] = servico; 
+
                         totalservicos++;
                         codservico++;
 
                         System.out.println("-------------------\n"
                                 + "Serviço cadastrado com sucesso! ");
-                        Servico servico = new Servico(codservico, descServico, valor, codpeca);
 
                         servico.visualizaServico();
                         System.out.println("\n\nDeseja cadastrar mais serviços? \n1-Sim ou 2-Não");
@@ -120,8 +120,25 @@ public class Oficina {
 
                         //PASSO 3: Percorre o array
                         for (int j = 0; j < totalservicos; j++) {
-                            if (servicos[j] != null) { // evita acessar posições nullas
-                                System.out.println("Código: " + servicos[j].codservico + " | Descrição: " + servicos[j].descricao+ " | Valor: " + servicos[j].valor+ " | Cód. Peça: " + servicos[j].codpeca);
+                            if (servicos[j] != null) {
+
+                                Peca p = Peca.getPeca(servicos[j].codpeca, pecas, totalpecas);
+
+                                if (p != null) {
+                                    System.out.println(
+                                        "Código: " + servicos[j].codservico +
+                                        " | Descrição: " + servicos[j].descricao +
+                                        " | Valor: " + servicos[j].valor +
+                                        " | Peça: [" + p.codpeca + " - " + p.nomepeca + "]"
+                                    );
+                                } else {
+                                    System.out.println(
+                                        "Código: " + servicos[j].codservico +
+                                        " | Descrição: " + servicos[j].descricao +
+                                        " | Valor: " + servicos[j].valor +
+                                        " | Peça: (não encontrada)"
+                                    );
+                                }
                             }
                         }
 
