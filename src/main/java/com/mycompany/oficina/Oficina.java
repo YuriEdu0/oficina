@@ -17,12 +17,16 @@ public class Oficina {
 
         do {
 
-            System.out.println("----MENU----\n"
-                    + "1- Cadastra peça\n"
-                    + "2- Cadastrar serviços\n"
-                    + "3- Imprimir serviços (tela e TXT)\n"
-                    + "4- Sair\n"
-                    + "--------------");
+            System.out.println(
+                    "======================\n"
+                    + "        MENU\n"
+                    + "======================\n"
+                    + "1 - Cadastrar peça\n"
+                    + "2 - Cadastrar serviços\n"
+                    + "3 - Imprimir serviços (tela e TXT)\n"
+                    + "4 - Sair\n"
+                    + "======================"
+            );
             menu = sc.nextInt();
             sc.nextLine(); //Limpar o \n
 
@@ -31,17 +35,20 @@ public class Oficina {
                 case 1:
                     do {
 
-                        System.out.print("--------Cadastro de Peças-------\n");
+                        System.out.print(
+                                "======================================\n"
+                                + "--------Cadastro de Peças-------\n"
+                            + "\"======================================\n");
 
                         System.out.print("Nome da peça: ");
                         peca = sc.nextLine();
 
                         i++;
 
-                        System.out.println("-------------------\n"
+                        System.out.println("====================\n"
                                 + "Peça cadastrada com sucesso! ");
                         Peca peca1 = new Peca(peca, i);
-                        pecas[totalpecas] = peca1; 
+                        pecas[totalpecas] = peca1;
                         totalpecas++;
                         peca1.nomePeca();
 
@@ -55,7 +62,10 @@ public class Oficina {
 
                 case 2:
                     do {
-                        System.out.print("--------Cadastro de Serviços-------\n");
+                        System.out.print(
+                                "======================================\n"
+                                +"--------Cadastro de Serviços-------\n" +
+                                "======================================\n");
                         if (totalpecas == 0) {
                             System.out.println("Nenhuma peça cadastrada ainda... Cadastre uma peça antes de cadastrar um serviço!");
                             break;
@@ -99,7 +109,7 @@ public class Oficina {
                         totalservicos++;
                         codservico++;
 
-                        System.out.println("-------------------\n"
+                        System.out.println("====================\n"
                                 + "Serviço cadastrado com sucesso! ");
 
                         servico.visualizaServico();
@@ -112,7 +122,10 @@ public class Oficina {
                     break;
 
                 case 3:
-                    System.out.print("--------Listagem de Serviços-------\n");
+                    System.out.print(
+                            "======================================\n" +
+                            "--------Listagem de Serviços-------\n" +
+                            "======================================\n");
                     if (totalservicos == 0) {
                         System.out.println("Nenhum serviço cadastrado ainda! Cadastre um serviço e tente novamente...");
                     } else {
