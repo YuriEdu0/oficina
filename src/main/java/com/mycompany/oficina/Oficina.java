@@ -38,7 +38,7 @@ public class Oficina {
                         System.out.print(
                                 "======================================\n"
                                 + "--------Cadastro de Peças-------\n"
-                            + "\"======================================\n");
+                                + "\"======================================\n");
 
                         System.out.print("Nome da peça: ");
                         peca = sc.nextLine();
@@ -64,8 +64,8 @@ public class Oficina {
                     do {
                         System.out.print(
                                 "======================================\n"
-                                +"--------Cadastro de Serviços-------\n" +
-                                "======================================\n");
+                                + "--------Cadastro de Serviços-------\n"
+                                + "======================================\n");
                         if (totalpecas == 0) {
                             System.out.println("Nenhuma peça cadastrada ainda... Cadastre uma peça antes de cadastrar um serviço!");
                             break;
@@ -123,9 +123,9 @@ public class Oficina {
 
                 case 3:
                     System.out.print(
-                            "======================================\n" +
-                            "--------Listagem de Serviços-------\n" +
-                            "======================================\n");
+                            "======================================\n"
+                            + "--------Listagem de Serviços-------\n"
+                            + "======================================\n");
                     if (totalservicos == 0) {
                         System.out.println("Nenhum serviço cadastrado ainda! Cadastre um serviço e tente novamente...");
                     } else {
@@ -151,13 +151,41 @@ public class Oficina {
                                 }
                             }
                         }
-
                         // Gera o arquivo TXT (mantendo a impressão na tela como está)
-                        Imprimir.imprimirServicos(servicos, totalservicos);
+
+                        if (totalservicos == 0) {
+                            System.out.println("Nenhum serviço cadastrado ainda! Cadastre um serviço e tente novamente...");
+                            return;
+                        }
+
+                        // Monta o conteúdo que será impresso e salvo no arquivo
+                        StringBuilder conteudo = new StringBuilder();
+                        conteudo.append("--------LISTAGEM DE SERVIÇOS--------\n");
+
+                        for (int j = 0; j < totalservicos; j++) {
+                            if (servicos[j] != null) {
+                                
+                                Peca p = Peca.getPeca(servicos[j].codpeca, pecas, totalpecas);
+                                
+                                String linha = "Código: " + servicos[j].codservico
+                                        + " | Descrição: " + servicos[j].descricao
+                                        + " | Valor: R$" + servicos[j].valor
+                                        + " | Peça: [" + p.codpeca + " - " + p.nomepeca + "]";
+                                conteudo.append(linha).append(System.lineSeparator());
+                            }
+                        }
+
+                        // Cria o arquivo de texto na pasta raiz do projeto
+                        GerenciadorDeArquivo gerenciador = new GerenciadorDeArquivo("servicos.txt");
+                        gerenciador.escreverConteudo(conteudo.toString());
+
+                        System.out.println("\n--> Arquivo 'servicos.txt' gerado com sucesso na pasta raiz do projeto!\n");
+
                     }
 
                     // Pequena pausa para o usuário ver a saída (opcional)
-                    System.out.println("Pressione ENTER para voltar ao menu...");
+                    System.out.println(
+                            "Pressione ENTER para voltar ao menu...");
                     sc.nextLine();
 
                     break;
